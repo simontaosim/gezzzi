@@ -1,0 +1,51 @@
+<% if session[:account] %>
+  <div class="container-fluid">
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">格子聊天</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">一个对话窗口</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= session[:account].email %><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">资料</a></li>
+            <li><a href="#">好友们</a></li>
+            <li><a href="#">加好友</a></li>
+            <li class="divider"></li>
+            <li><li class=navbar-logout>
+              <%= button_to(:登出, url(:logout), :method => :delete, :class => 'btn btn-link')  %>
+            </li></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+ <div class="container">
+ 	 
+    <%= javascript_include_tag 'jquery-1.11.0.min' %>
+   <script type="text/javascript">
+   	$(document).ready(function(){
+   		$('h2').css('background','red');
+   	});
+   </script>
+ </div>
+  
+<% else %>
+  <% redirect(:login)  %>
+<% end %>

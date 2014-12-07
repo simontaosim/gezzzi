@@ -8,6 +8,8 @@ class Account
   field :email,            :type => String
   field :crypted_password, :type => String
   field :role,             :type => String
+  field :x,   :type => Integer
+  field :y,   :type => Integer
 
   # Validations
   validates_presence_of     :email, :role

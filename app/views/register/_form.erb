@@ -1,0 +1,31 @@
+<h2>注册一个新用户</h2>
+<% error = @account.errors.include?(:email) %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :邮箱, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.email_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<% error = @account.errors.include?(:password) %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :密码, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.password_field :password, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<% error = @account.errors.include?(:password_confirmation) %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :密码确认, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.password_field :password_confirmation, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+    <%= f.hidden_field :role, :value => 'chatter' %>
+
+
+
+<div class="form-actions">
+  <%= f.submit '创建', :class => 'btn btn-primary' %>
+  &nbsp;
+  <%= link_to '取消', url('login'), :class => 'btn btn-default' %>
+</div>

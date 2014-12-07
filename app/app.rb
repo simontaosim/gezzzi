@@ -5,6 +5,52 @@ module Gezzzi
 
     enable :sessions
 
+    get '/' do
+        render('index/index', :layout => :index) 
+    end
+
+    get 'login' do
+        render('login/login', :layout => :index)
+    end
+
+    post 'new_session' do
+     if account = Account.authenticate(params[:email], params[:password])
+       session[:account] = account
+        flash.now[:success] = '登陆成功'
+     render('index/index', :layout => :index) 
+     elsif Padrino.env == :development && params[:bypass]
+      account = Account.first
+     session[:account] = account
+     redirect url('/')
+     else
+      params[:email] = h(params[:email])
+       flash.now[:error] = '密码或邮箱错误'
+       render('login/login', :layout => :index)
+     end
+    end
+
+    delete :logout do
+        session[:account] =nil
+        redirect url('/');
+    end
+
+    get 'register' do
+        @account = Account.new
+        render('register/index', :layout => :index)
+    end
+
+    post 'new_account' do
+     @account = Account.new(params[:account])
+     if @account.save
+        flash.now[:success] = '注册成功,请登录'
+     render('/login/login', :layout => :index) 
+       
+     else
+      flash.now[:error] = '邮箱已经存在或者二次密码不一致'
+       render('register/index', :layout => :index)
+    end
+    end
+
     ##
     # Caching support.
     #

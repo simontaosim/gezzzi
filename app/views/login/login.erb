@@ -1,0 +1,24 @@
+<% form_tag url('new_session'), :class=>"login form-horizontal" do %>
+<h2>登录</h2>
+<div class="login-body modal-body">
+
+        <div class="form-group">
+          <label for="email" class="col-lg-2 control-label">邮箱</label>
+          <div class="col-lg-10"><%= email_field_tag :email, :id => :email, :value => params[:email], :autofocus => true, :class => 'form-control' %></div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-lg-2 control-label">密码</label>
+          <div class="col-lg-10"><%= password_field_tag :password, :id => :password, :class => 'form-control' %></div>
+        </div>
+
+        <fieldset class="login-control-group-last control-group">
+          <div class="login-controls controls">
+            <label class="login-bypass-label checkbox"><%= check_box_tag :bypass %>  记住我</label>
+          </div>
+        </fieldset>
+
+      </div>
+      <%= link_to '注册一个新用户', url('register') %>
+      <div class="login-footer modal-footer"><%= submit_tag "登录", :class => "btn btn-primary pull-right" %></div>
+<% end %>
